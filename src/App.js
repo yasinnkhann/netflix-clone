@@ -13,7 +13,7 @@ import ProfileScreen from './components/ProfileScreen/ProfileScreen';
 import CompatibilityScreen from './components/Compatibility/CompatibilityScreen';
 import { isMobile } from 'react-device-detect';
 import { login, logout, selectRole } from './features/userSlice';
-import { auth } from './firebase';
+import { auth } from './firebaseConfig';
 import Spinner from 'react-spinkit';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -73,9 +73,11 @@ function App() {
                   );
                 }}
               />
+
               <Route exact path='/profile'>
                 <ProfileScreen />
               </Route>
+
               <Route exact path='/home'>
                 <HomeScreen />
               </Route>

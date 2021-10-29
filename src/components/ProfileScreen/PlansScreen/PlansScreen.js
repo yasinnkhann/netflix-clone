@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, setUserSubscription } from '../../../features/userSlice';
-import db from '../../../firebase';
+import db from '../../../firebaseConfig';
 import './PlansScreen.css';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -22,15 +22,15 @@ const PlansScreen = () => {
           setSubscription({
             role: subscription.data().role,
             current_period_end: subscription.data().current_period_end.seconds,
-            current_period_start: subscription.data().current_period_start
-              .seconds,
+            current_period_start:
+              subscription.data().current_period_start.seconds,
           });
           dispatch(
             setUserSubscription({ subscriptionRole: subscription.data().role })
           );
         });
       });
-  }, [user?.uid]);
+  }, [user?.uid, dispatch]);
 
   useEffect(() => {
     db.collection('products')
@@ -78,7 +78,7 @@ const PlansScreen = () => {
         // Init Stripe
 
         const stripe = await loadStripe(
-          'pk_test_51Jkdb8Hu3wcNXM1QarCo5tDJnz7imSQckWbjjVcDMzI34bKcFbJI4tJEL9VDs2DVZrZXtmUbhduW6i3xYaZNsFWD00wgfNsr8z'
+          process.env.REACT_APP_STRIPE_PUBLIC_KEY
         );
         stripe.redirectToCheckout({ sessionId });
         setLoading(false);

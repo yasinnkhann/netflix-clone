@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated } from 'react-animated-css';
 import { useSelector } from 'react-redux';
 import { selectUser, selectRole } from '../../features/userSlice';
-import { auth } from '../../firebase';
+import { auth } from '../../firebaseConfig';
 import Nav from '../Nav/Nav';
 import PlansScreen from './PlansScreen/PlansScreen';
 import './ProfileScreen.css';
